@@ -120,3 +120,7 @@ enum Role {
 - Unit & integration tests (Jest / Supertest)
 - Account locking after failed login attempts
 - Audit logs (user activity tracking)
+
+# POSTMAN
+- AUTH+BLOCK.postman_collection.json
+
