@@ -1,0 +1,97 @@
+{
+  "info": {
+    "_postman_id": "dee8898b-2b0d-457b-8f83-4506d7748a7a",
+    "name": "AUTH+BLOCK",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "41962600"
+  },
+  "item": [
+    {
+      "name": "GET USERS",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:4000/users",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "4000",
+          "path": ["users"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "REGISTER",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"fullName\": \"Иван Петров\",\n    \"birthDate\": \"1998-06-14\",\n    \"email\": \"ivan.petrov@mail.ru\",\n    \"password\": \"Ivan12345!\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:4000/auth/register",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "4000",
+          "path": ["auth", "register"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "LOGIN",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"email\": \"ivan.petrov@mail.ru\",\n    \"password\": \"Ivan12345!\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:4000/auth/login",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "4000",
+          "path": ["auth", "login"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "BLOCK USER",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"reason\": \"Нарушение правил системы\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:4000/users/block/d1d90da0-4c65-43f2-8c02-282136997e49",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "4000",
+          "path": ["users", "block", "d1d90da0-4c65-43f2-8c02-282136997e49"]
+        }
+      },
+      "response": []
+    }
+  ]
+}
