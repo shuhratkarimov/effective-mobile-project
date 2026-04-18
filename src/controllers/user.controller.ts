@@ -43,7 +43,6 @@ export const block = async (req: AuthRequest, res: Response, next: NextFunction)
         const currentUser = req.user;
 
         if (!currentUser) throw BaseError.UnauthorizedError();
-
         const isAdmin = currentUser.role === Role.ADMIN;
         const isSelf = currentUser.userId === id;
 

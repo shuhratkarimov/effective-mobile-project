@@ -20,7 +20,6 @@ const register = async (req: Request, res: Response, next: NextFunction) => {
         const response: RegisterResponseDto = {
             success: true,
             message: "User successfully registered.",
-            requiresVerification: true,
             user: {
                 id: user.id,
                 email: user.email,

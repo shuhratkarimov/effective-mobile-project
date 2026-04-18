@@ -58,7 +58,6 @@ export interface AuthUserDto {
 export interface RegisterResponseDto {
   success: true;
   message: string;
-  requiresVerification: true;
   user: Pick<AuthUserDto, "id" | "email" | "fullName">;
 }
 

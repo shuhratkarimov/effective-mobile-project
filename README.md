@@ -59,19 +59,24 @@ npm install
 Создай файл .env в корне проекта:
 
 - PORT=4000
-- DATABASE_URL="postgresql://USER:PASSWORD@localhost:5432/project1"
+- DATABASE_URL="postgresql://postgres:shuhrat0049@localhost:5432/project1"
 - JWT_ACCESS_SECRET=your_secret_key
 - JWT_ACCESS_EXPIRES_IN=15m
 - JWT_REFRESH_SECRET=your_secret_key2
 - JWT_REFRESH_EXPIRES_IN=7d
 - NODE_ENV=development
 
+# Подключение к PostgreSQL
+- USER — имя пользователя PostgreSQL (например: postgres)
+- PASSWORD — пароль базы данных
+- project1 — название базы данных
+
 4. Настроить базу данных
 - npx prisma generate
 - npx prisma migrate dev --name init
 
 или (быстрый вариант):
-
+- npx prisma migrate reset
 - npx prisma db push
 
 5. Запуск проекта
