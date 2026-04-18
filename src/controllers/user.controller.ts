@@ -16,23 +16,6 @@ export const getUser = async (req: AuthRequest, res: Response, next: NextFunctio
     }
 };
 
-export const getMe = async (req: AuthRequest, res: Response, next: NextFunction) => {
-    try {
-        const currentUser = req.user;
-        if (!currentUser) throw BaseError.UnauthorizedError();
-
-        const user = await userService.findById(currentUser.userId);
-        if (!user) throw BaseError.NotFound("User not found");
-
-        res.json({
-            success: true,
-            data: user,
-        });
-    } catch (error) {
-        return next(error);
-    }
-};
-
 export const getAllUsers = async (req: AuthRequest, res: Response, next: NextFunction) => {
     try {
         const { page, limit } = paginationQuerySchema.parse(req.query);
@@ -64,8 +47,12 @@ export const block = async (req: AuthRequest, res: Response, next: NextFunction)
         const isAdmin = currentUser.role === Role.ADMIN;
         const isSelf = currentUser.userId === id;
 
+        if (isAdmin && isSelf) {
+            throw BaseError.Forbidden("Admin cannot block themselves!");
+        }
+
         if (!isAdmin && !isSelf) {
-            throw BaseError.Forbidden("You don't have permission to block this user!");
+            throw BaseError.Forbidden("Users can only block themselves!");
         }
 
         const user = await userService.blockUser(id);

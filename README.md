@@ -1,3 +1,4 @@
+
 # User Service API
 
 Простой backend-сервис для управления пользователями, разработанный с использованием Node.js, TypeScript, Prisma ORM и PostgreSQL.
@@ -6,41 +7,46 @@
 
 Сервис реализует базовую работу с пользователями:
 
-Регистрация пользователя
-Авторизация (JWT)
-Получение пользователя по ID
-Роли пользователей: ADMIN / USER
-Активация / деактивация пользователя
+- Регистрация пользователя
+- Авторизация (JWT)
+- Получение пользователя по ID
+- Роли пользователей: ADMIN / USER
+- Активация / деактивация пользователя
 
 # Middleware:
-Валидация данных
-Rate Limiter
-Обработка ошибок
+- Валидация входящих данных (Validator middleware)
+- Ограничение количества запросов (Rate Limiter)
+- Обработка ошибок (Error Handling middleware)
+- Проверка ролей пользователей (Role-based access control)
+- Проверка прав доступа к ресурсам (Authorization checks)
 
 # Стек технологий
-Node.js
-TypeScript
-Prisma ORM
-PostgreSQL
-JWT (аутентификация)
-Express (или аналогичный фреймворк)
+- Node.js
+- TypeScript
+- Prisma ORM
+- PostgreSQL
+- JWT (аутентификация)
+- Express
 
 # Структура проекта
 prisma/
- ├── schema.prisma
- └── migrations/
-src/
- ├── controllers/
- ├── services/
- ├── middlewares/
- ├── routes/
- ├── utils/
- └── index.ts
- .env
- .gitignore
- package.json
- tsconfig.json
-
+ - ├── schema.prisma
+ - └── migrations/
+- src/
+- ├── config/
+- ├── controllers/
+- ├── dto/
+- ├── enums/
+- ├── middlewares/
+- ├── routes/
+- ├── services/
+- ├── utils/
+- ├── validators/
+- └── index.ts
+- .env
+- .gitignore
+- package.json
+- tsconfig.json
 
 # Установка и запуск
 1. Клонировать проект
@@ -61,25 +67,25 @@ JWT_REFRESH_EXPIRES_IN=7d
 NODE_ENV=development
 
 4. Настроить базу данных
-npx prisma generate
-npx prisma migrate dev --name init
+- npx prisma generate
+- npx prisma migrate dev --name init
 
 или (быстрый вариант):
 
-npx prisma db push
+- npx prisma db push
 
 5. Запуск проекта
-npm run dev
+- npm run dev
 
 # Prisma модель User
 model User {
-  id        String   @id @default(uuid())
-  fullName  String
-  birthDate DateTime
-  email     String   @unique
-  password  String
-  role      Role     @default(USER)
-  isActive  Boolean  @default(true)
+- id        String   @id @default(uuid())
+- fullName  String
+- birthDate DateTime
+- email     String   @unique
+- password  String
+- role      Role     @default(USER)
+- isActive  Boolean  @default(true)
 }
 
 enum Role {
@@ -88,18 +94,24 @@ enum Role {
 }
 
 # Примечания
-Все пароли хранятся в хешированном виде (bcrypt)
-JWT используется для защиты приватных маршрутов
-Middleware обрабатывает ошибки и ограничивает запросы
+- Все пароли хранятся в хешированном виде (bcrypt)
+- JWT используется для защиты приватных маршрутов
+- Middleware обрабатывает ошибки и ограничивает запросы
+
+# Правила доступа (Business Logic)
+- Пользователь может блокировать только свой аккаунт
+- Администратор имеет право блокировать любого пользователя
+- Обычный пользователь не имеет доступа к управлению другими аккаунтами
+- Администратор не может блокировать собственный аккаунт
 
 # Возможные улучшения
-Refresh Token система
-Email верификация
-Forgot / Reset password flow
-Логирование (Winston / Pino)
-Docker контейнеризация
-CI/CD pipeline
-Swagger / OpenAPI documentation
-Unit & integration tests (Jest / Supertest)
-Account locking after failed login attempts
-Audit logs (user activity tracking)
+- Refresh Token система
+- Email верификация
+- Forgot / Reset password flow
+- Логирование (Winston / Pino)
+- Docker контейнеризация
+- CI/CD pipeline
+- Swagger / OpenAPI documentation
+- Unit & integration tests (Jest / Supertest)
+- Account locking after failed login attempts
+- Audit logs (user activity tracking)
