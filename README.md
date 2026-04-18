@@ -58,13 +58,13 @@ npm install
 
 Создай файл .env в корне проекта:
 
-PORT=4000
-DATABASE_URL="postgresql://USER:PASSWORD@localhost:5432/project1"
-JWT_ACCESS_SECRET=your_secret_key
-JWT_ACCESS_EXPIRES_IN=15m
-JWT_REFRESH_SECRET=your_secret_key2
-JWT_REFRESH_EXPIRES_IN=7d
-NODE_ENV=development
+- PORT=4000
+- DATABASE_URL="postgresql://USER:PASSWORD@localhost:5432/project1"
+- JWT_ACCESS_SECRET=your_secret_key
+- JWT_ACCESS_EXPIRES_IN=15m
+- JWT_REFRESH_SECRET=your_secret_key2
+- JWT_REFRESH_EXPIRES_IN=7d
+- NODE_ENV=development
 
 4. Настроить базу данных
 - npx prisma generate
